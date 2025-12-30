@@ -6,7 +6,7 @@
     content: '';
     position: absolute;
     top: 1px;
-    right: 40px;
+    right: 1px;
     bottom: 1px;
     width: 60px;
     background: linear-gradient(to right, transparent, rgba(22, 27, 35, 0.95));
@@ -23,7 +23,8 @@
     color: var(--mantine-color-gray-3);
     padding-block: 12px;
     padding-inline: 16px;
-    padding-right: 48px;
+    padding-right: 6px;
+    padding-left: 32px;
     height: auto;
     min-height: unset;
     line-height: 1.5;
@@ -41,4 +42,26 @@
 .input:focus {
     border-color: rgba(34, 211, 238, 0.4);
     outline: none;
+}
+
+.icon {
+    opacity: 0.6;
+    cursor: pointer;
+    animation: iconEnter 150ms ease;
+    transition: opacity 150ms ease;
+}
+
+.icon:hover {
+    opacity: 1;
+}
+
+@keyframes iconEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 0.6;
+        transform: scale(1);
+    }
 }

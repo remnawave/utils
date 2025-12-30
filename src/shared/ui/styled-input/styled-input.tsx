@@ -1,4 +1,5 @@
-import { CloseButton, Input } from '@mantine/core'
+import { IconWriting, IconX } from '@tabler/icons-react'
+import { Input } from '@mantine/core'
 
 import styles from './styled-input.module.css'
 
@@ -19,6 +20,8 @@ export function StyledInput({
     label,
     size = 'sm'
 }: StyledInputProps) {
+    const hasValue = Boolean(value)
+
     return (
         <Input.Wrapper description={description} label={label} size={size}>
             <Input
@@ -26,19 +29,21 @@ export function StyledInput({
                     input: styles.input,
                     wrapper: styles.wrapper
                 }}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={placeholder}
-                rightSection={
-                    value && (
-                        <CloseButton
-                            aria-label="Clear input"
+                leftSection={
+                    hasValue ? (
+                        <IconX
+                            className={styles.icon}
+                            color="white"
                             onClick={() => onChange('')}
-                            size="sm"
-                            variant="transparent"
+                            size={20}
                         />
+                    ) : (
+                        <IconWriting className={styles.icon} size={20} />
                     )
                 }
-                rightSectionPointerEvents="all"
+                leftSectionPointerEvents="all"
+                onChange={(e) => onChange(e.target.value)}
+                placeholder={placeholder}
                 value={value}
             />
         </Input.Wrapper>
