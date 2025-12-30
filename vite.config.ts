@@ -12,8 +12,8 @@ export default defineConfig({
     plugins: [react(), tsconfigPaths(), removeConsole(), webfontDownload()],
     build: {
         target: 'esNext',
-        outDir: 'landing',
-        assetsDir: 'landing-assets',
+        outDir: 'dist',
+        assetsDir: 'assets',
         chunkSizeWarningLimit: 1000000
         // minify: 'terser'
     },
