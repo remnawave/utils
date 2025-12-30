@@ -1,1 +1,1 @@
-export { CopyableCodeBlock } from './copyable-code-block'
+export * from './copyable-code-block'

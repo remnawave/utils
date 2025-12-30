@@ -11,7 +11,7 @@ type IProps = {
     titleOrder?: TitleProps['order']
 }
 
-export const BaseOverlayHeader = (props: IProps) => {
+export function BaseOverlayHeader(props: IProps) {
     const {
         actionIconProps,
         IconComponent,

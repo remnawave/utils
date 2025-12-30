@@ -1,1 +1,1 @@
-export { PageHeader } from './page-header'
+export * from './page-header'

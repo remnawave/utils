@@ -1,2 +1,1 @@
-export { PageLayout } from './page-layout'
-
+export * from './page-layout'

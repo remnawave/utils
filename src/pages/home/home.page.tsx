@@ -2,8 +2,8 @@ import { IconLock, IconRocket, IconRoute, IconTool } from '@tabler/icons-react'
 import { SimpleGrid, ThemeIconProps } from '@mantine/core'
 
 import { AnimatedSection, PageHeader, PageLayout } from '@shared/ui'
+import { UtilityCard } from '@widgets/utility-card'
 import { ROUTES } from '@shared/constants'
-import { UtilityCard } from '@widgets'
 
 interface IUtility {
     badge?: string

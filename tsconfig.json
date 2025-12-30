@@ -36,26 +36,14 @@
     /* ------------------------------------------------------------ */
     "baseUrl": ".",
     "paths": {
-      "@entities": [
-        "./src/entities"
-      ],
       "@entities/*": [
         "./src/entities/*"
-      ],
-      "@features": [
-        "./src/features"
       ],
       "@features/*": [
         "./src/features/*"
       ],
-      "@pages": [
-        "./src/pages"
-      ],
       "@pages/*": [
         "./src/pages/*"
-      ],
-      "@widgets": [
-        "./src/widgets"
       ],
       "@widgets/*": [
         "./src/widgets/*"
@@ -63,12 +51,9 @@
       "@public/*": [
         "./public/*"
       ],
-      "@shared": [
-        "./src/shared"
-      ],
       "@shared/*": [
         "./src/shared/*"
-      ]
+      ],
     }
   },
   "include": [

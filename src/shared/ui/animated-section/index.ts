@@ -1,2 +1,1 @@
-export { AnimatedSection } from './animated-section'
-
+export * from './animated-section'
