@@ -1,7 +1,7 @@
-import { SimpleGrid, Stack, Text, ThemeIconProps, Title } from '@mantine/core'
-import { IconLock, IconRocket, IconRoute } from '@tabler/icons-react'
+import { IconLock, IconRocket, IconRoute, IconTool } from '@tabler/icons-react'
+import { SimpleGrid, ThemeIconProps } from '@mantine/core'
 
-import { AnimatedSection, PageLayout } from '@shared/ui'
+import { AnimatedSection, PageHeader, PageLayout } from '@shared/ui'
 import { ROUTES } from '@shared/constants'
 import { UtilityCard } from '@widgets'
 
@@ -23,7 +23,6 @@ const UTILITIES = [
             'Experience the power of Remnawave with zero setup. Deploy your own instance in minutes and explore all features risk-free.',
         icon: <IconRocket size={28} />,
         href: 'https://try.tg',
-        badge: 'Free',
         badgeColor: 'violet',
         external: true,
         variant: 'gradient-violet'
@@ -50,15 +49,17 @@ export function HomePage() {
     return (
         <PageLayout gap="4rem">
             <AnimatedSection>
-                <Stack align="center" gap="lg" mb="xl">
-                    <Title order={1} size="3rem" ta="center">
-                        Remnawave Utilities
-                    </Title>
-                    <Text c="dimmed" size="lg" ta="center">
-                        A collection of useful tools for working with Remnawave.
-                        <br /> Select the utility you need from the list below.
-                    </Text>
-                </Stack>
+                <PageHeader
+                    description={
+                        <>
+                            A collection of useful tools for working with Remnawave.
+                            <br />
+                            Select the utility you need from the list below.
+                        </>
+                    }
+                    icon={<IconTool size={28} />}
+                    title="Remnawave Utils"
+                />
             </AnimatedSection>
 
             <AnimatedSection>
@@ -68,7 +69,6 @@ export function HomePage() {
                 >
                     {UTILITIES.map((utility) => (
                         <UtilityCard
-                            badge={utility.badge}
                             badgeColor={utility.badgeColor}
                             description={utility.description}
                             external={utility.external}

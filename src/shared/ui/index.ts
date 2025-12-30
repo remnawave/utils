@@ -1,4 +1,7 @@
 export { AnimatedSection } from './animated-section'
 export { CopyableCodeBlock } from './copyable-code-block'
+export { PageFooter } from './page-footer'
+export type { FooterLink } from './page-footer'
+export { PageHeader } from './page-header'
 export { PageLayout } from './page-layout'
 export { StyledInput } from './styled-input'
