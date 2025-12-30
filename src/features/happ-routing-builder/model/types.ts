@@ -25,6 +25,7 @@ export interface HappRoutingData {
     RemoteDNSIP?: string
     RemoteDNSIp?: string
     RemoteDNSType?: string
+    RouteOrder?: string
     UseChunkFiles?: string
     useChunkFiles?: string
 }
@@ -50,5 +51,6 @@ export interface FormData {
     remoteDnsDomain: string
     remoteDnsIp: string
     remoteDnsType: string
+    routeOrder: string
     useChunkFiles: string
 }

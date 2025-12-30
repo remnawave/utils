@@ -4,6 +4,7 @@ import {
     DOMAIN_STRATEGY_OPTIONS,
     type FormData,
     GLOBAL_PROXY_OPTIONS,
+    ROUTE_ORDER_OPTIONS,
     TOGGLE_OPTIONS
 } from '../../model'
 
@@ -32,6 +33,16 @@ export function BasicTab({ formData, updateField }: BasicTabProps) {
                     label="Routing Mode"
                     onChange={(value) => updateField('globalProxy', value || 'true')}
                     value={formData.globalProxy}
+                />
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, sm: 6 }}>
+                <Select
+                    data={ROUTE_ORDER_OPTIONS}
+                    description="Define the execution order of routing rules"
+                    label="Route Order"
+                    onChange={(value) => updateField('routeOrder', value || 'block-proxy-direct')}
+                    value={formData.routeOrder}
                 />
             </Grid.Col>
 

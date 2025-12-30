@@ -13,6 +13,7 @@ export function formatJsonData(formData: FormData): HappRoutingData {
     return {
         Name: formData.name,
         GlobalProxy: formData.globalProxy,
+        RouteOrder: formData.routeOrder,
         RemoteDNSType: formData.remoteDnsType,
         RemoteDNSDomain: formData.remoteDnsDomain,
         RemoteDNSIP: formData.remoteDnsIp,
@@ -65,6 +66,7 @@ export function jsonDataToFormData(jsonData: HappRoutingData, currentFormData: F
 
     if (jsonData.Name !== undefined) newFormData.name = jsonData.Name
     if (jsonData.GlobalProxy !== undefined) newFormData.globalProxy = String(jsonData.GlobalProxy)
+    if (jsonData.RouteOrder !== undefined) newFormData.routeOrder = jsonData.RouteOrder
 
     if (jsonData.RemoteDNSType !== undefined) newFormData.remoteDnsType = jsonData.RemoteDNSType
     if (jsonData.RemoteDNSDomain !== undefined)

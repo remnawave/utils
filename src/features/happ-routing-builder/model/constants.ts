@@ -4,6 +4,7 @@ export const DEFAULT_FORM_DATA: FormData = {
     name: '',
     globalProxy: 'true',
     remoteDnsType: 'DoH',
+    routeOrder: 'block-proxy-direct',
     remoteDnsDomain: '',
     remoteDnsIp: '',
     domesticDnsType: 'DoU',
@@ -43,4 +44,13 @@ export const DOMAIN_STRATEGY_OPTIONS = [
     { value: 'IPIfNonMatch', label: 'IPIfNonMatch' },
     { value: 'AsIs', label: 'AsIs' },
     { value: 'IPOnDemand', label: 'IPOnDemand' }
+]
+
+export const ROUTE_ORDER_OPTIONS = [
+    { value: 'block-proxy-direct', label: 'Block → Proxy → Direct' },
+    { value: 'block-direct-proxy', label: 'Block → Direct → Proxy' },
+    { value: 'proxy-direct-block', label: 'Proxy → Direct → Block' },
+    { value: 'proxy-block-direct', label: 'Proxy → Block → Direct' },
+    { value: 'direct-proxy-block', label: 'Direct → Proxy → Block' },
+    { value: 'direct-block-proxy', label: 'Direct → Block → Proxy' }
 ]
