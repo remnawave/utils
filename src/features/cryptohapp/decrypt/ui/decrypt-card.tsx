@@ -1,29 +1,47 @@
-import { Box, Button, Card, Group, Stack, Text, Textarea, ThemeIcon } from '@mantine/core'
-import { IconLockOpen } from '@tabler/icons-react'
+import {
+    ActionIcon,
+    Box,
+    Button,
+    Card,
+    Group,
+    Select,
+    Stack,
+    Text,
+    Textarea,
+    ThemeIcon,
+    Tooltip
+} from '@mantine/core'
+import { IconLockOpen, IconPlus, IconTrash } from '@tabler/icons-react'
+import { useDisclosure } from '@mantine/hooks'
 import { motion } from 'motion/react'
 import JSEncrypt from 'jsencrypt'
 import { useState } from 'react'
 
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
 
+import { useDecryptKeys, useDecryptKeysActions, useSelectedKey, useSelectedKeyId } from '../model'
 import styles from './decrypt-card.module.css'
-
-const EXAMPLE_PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
-Paste your private key here...
------END RSA PRIVATE KEY-----`
+import { AddKeyModal } from './add-key-modal'
 
 export function DecryptCard() {
-    const [privateKey, setPrivateKey] = useState('')
     const [encryptedContent, setEncryptedContent] = useState('')
     const [decryptedContent, setDecryptedContent] = useState<null | string>(null)
     const [error, setError] = useState<null | string>(null)
+    const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false)
+
+    const keys = useDecryptKeys()
+    const selectedKeyId = useSelectedKeyId()
+    const selectedKey = useSelectedKey()
+    const { deleteKey, selectKey } = useDecryptKeysActions()
+
+    const keyOptions = keys.map((k) => ({ label: k.name, value: k.id }))
 
     const handleDecrypt = () => {
         setError(null)
         setDecryptedContent(null)
 
-        if (!privateKey.trim()) {
-            setError('Please enter a valid private key')
+        if (!selectedKey) {
+            setError('Please select a decrypt key')
             return
         }
 
@@ -34,7 +52,7 @@ export function DecryptCard() {
 
         try {
             const decrypt = new JSEncrypt()
-            decrypt.setPrivateKey(privateKey)
+            decrypt.setPrivateKey(selectedKey.content)
 
             let contentToDecrypt = encryptedContent.trim()
             const prefixes = ['happ://crypt2/', 'happ://crypt3/', 'happ://crypt4/']
@@ -56,6 +74,12 @@ export function DecryptCard() {
             }
         } catch {
             setError('Decryption error. Please check your private key format.')
+        }
+    }
+
+    const handleDeleteKey = () => {
+        if (selectedKeyId) {
+            deleteKey(selectedKeyId)
         }
     }
 
@@ -82,23 +106,45 @@ export function DecryptCard() {
                         </Box>
                     </Group>
 
-                    <Textarea
-                        autosize
-                        description="Your RSA private key (PEM format)"
-                        label="Private Key"
-                        maxRows={8}
-                        minRows={8}
-                        onChange={(e) => setPrivateKey(e.currentTarget.value)}
-                        placeholder={EXAMPLE_PRIVATE_KEY}
-                        size="md"
-                        styles={{
-                            input: {
-                                fontFamily: 'Fira Mono, monospace',
-                                fontSize: '0.70rem'
-                            }
-                        }}
-                        value={privateKey}
-                    />
+                    <Stack gap="xs">
+                        <Group align="flex-end" gap="xs">
+                            <Select
+                                allowDeselect={false}
+                                data={keyOptions}
+                                description="🔒 All keys are stored locally in your browser"
+                                label="Decrypt Key"
+                                onChange={(value) => selectKey(value)}
+                                placeholder={
+                                    keys.length === 0 ? 'No keys saved' : 'Select a key...'
+                                }
+                                style={{ flex: 1 }}
+                                value={selectedKeyId}
+                            />
+                            <Tooltip label="Add new key">
+                                <ActionIcon
+                                    onClick={openModal}
+                                    size="input-sm"
+                                    variant="gradient-cyan"
+                                >
+                                    <IconPlus size={18} />
+                                </ActionIcon>
+                            </Tooltip>
+                            {selectedKeyId && (
+                                <Tooltip label="Delete selected key">
+                                    <ActionIcon
+                                        color="red"
+                                        onClick={handleDeleteKey}
+                                        size="input-sm"
+                                        variant="gradient-red"
+                                    >
+                                        <IconTrash size={18} />
+                                    </ActionIcon>
+                                </Tooltip>
+                            )}
+                        </Group>
+                    </Stack>
+
+                    <AddKeyModal onClose={closeModal} opened={modalOpened} />
 
                     <Textarea
                         autosize
