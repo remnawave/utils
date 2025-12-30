@@ -1,5 +1,5 @@
+import { Badge, Divider, Grid, Group, Stack, Text, Textarea } from '@mantine/core'
 import { IconArrowRight, IconShield, IconX } from '@tabler/icons-react'
-import { Badge, Grid, Stack, Text, Textarea } from '@mantine/core'
 
 import type { FormData } from '../../model'
 
@@ -12,18 +12,19 @@ export function RoutingTab({ formData, updateField }: RoutingTabProps) {
     return (
         <Stack gap="xl">
             <Stack gap="sm">
-                <Text fw={600} size="sm">
+                <Group gap="xs">
                     <Badge
                         color="teal"
                         leftSection={<IconArrowRight size={12} />}
-                        mr="xs"
                         size="md"
                         variant="light"
                     >
                         DIRECT
                     </Badge>
-                    Bypass proxy for these destinations
-                </Text>
+                    <Text fw={600} size="sm">
+                        Bypass proxy for these destinations
+                    </Text>
+                </Group>
                 <Grid>
                     <Grid.Col span={{ base: 12, md: 6 }}>
                         <Textarea
@@ -54,19 +55,22 @@ export function RoutingTab({ formData, updateField }: RoutingTabProps) {
                 </Grid>
             </Stack>
 
+            <Divider opacity={0.3} />
+
             <Stack gap="sm">
-                <Text fw={600} size="sm">
+                <Group gap="xs">
                     <Badge
                         color="cyan"
                         leftSection={<IconShield size={12} />}
-                        mr="xs"
                         size="md"
                         variant="light"
                     >
                         PROXY
                     </Badge>
-                    Force proxy for these destinations
-                </Text>
+                    <Text fw={600} size="sm">
+                        Force proxy for these destinations
+                    </Text>
+                </Group>
                 <Grid>
                     <Grid.Col span={{ base: 12, md: 6 }}>
                         <Textarea
@@ -97,19 +101,17 @@ export function RoutingTab({ formData, updateField }: RoutingTabProps) {
                 </Grid>
             </Stack>
 
+            <Divider opacity={0.3} />
+
             <Stack gap="sm">
-                <Text fw={600} size="sm">
-                    <Badge
-                        color="red"
-                        leftSection={<IconX size={12} />}
-                        mr="xs"
-                        size="md"
-                        variant="light"
-                    >
+                <Group gap="xs">
+                    <Badge color="red" leftSection={<IconX size={12} />} size="md" variant="light">
                         BLOCK
                     </Badge>
-                    Block these destinations completely
-                </Text>
+                    <Text fw={600} size="sm">
+                        Block these destinations completely
+                    </Text>
+                </Group>
                 <Grid>
                     <Grid.Col span={{ base: 12, md: 6 }}>
                         <Textarea

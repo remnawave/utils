@@ -1,5 +1,5 @@
-import { Button, Paper, Stack, Text } from '@mantine/core'
 import { IconFileImport, IconRefresh } from '@tabler/icons-react'
+import { Button, Paper, Stack, Text } from '@mantine/core'
 
 import { BaseOverlayHeader } from '@shared/ui/base-overlay-header'
 import { StyledInput } from '@shared/ui'
@@ -50,4 +50,3 @@ export function ImportPanel({ value, onInputChange, onImport, error }: ImportPan
         </Paper>
     )
 }
-

@@ -44,7 +44,7 @@ export function EncryptCard() {
         <motion.div transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
             <Card className={styles.card} padding="xl" radius="lg">
                 <Stack gap="lg">
-                    <Group gap="md">
+                    <Group gap="md" wrap="nowrap">
                         <ThemeIcon
                             className={styles.icon}
                             radius="xl"

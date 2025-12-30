@@ -1,5 +1,16 @@
-import { Anchor, Box, Burger, Container, Drawer, Group, Stack, Text } from '@mantine/core'
+import {
+    Anchor,
+    Box,
+    Burger,
+    Container,
+    Drawer,
+    Group,
+    Stack,
+    Text,
+    UnstyledButton
+} from '@mantine/core'
 import { useDisclosure, useWindowScroll } from '@mantine/hooks'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 
@@ -12,6 +23,7 @@ export function Header() {
     const [opened, { toggle, close }] = useDisclosure(false)
     const [scroll] = useWindowScroll()
     const [isScrolled, setIsScrolled] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         setIsScrolled(scroll.y > 50)
@@ -31,7 +43,7 @@ export function Header() {
                             initial={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <Anchor className={styles.logo} href="/">
+                            <UnstyledButton className={styles.logo} onClick={() => navigate('/')}>
                                 <Group gap="xs" wrap="nowrap">
                                     <RemnawaveLogo size={32} />
                                     <Text
@@ -65,7 +77,7 @@ export function Header() {
                                         </Text>
                                     </Text>
                                 </Group>
-                            </Anchor>
+                            </UnstyledButton>
                         </motion.div>
 
                         <div className={styles.nav}>
@@ -76,15 +88,25 @@ export function Header() {
                                     key={link.href}
                                     transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
-                                    <Anchor
-                                        className={styles.navLink}
-                                        href={link.href}
-                                        rel={link.external ? 'noopener noreferrer' : undefined}
-                                        target={link.external ? '_blank' : undefined}
-                                    >
-                                        <Box className={styles.navIcon}>{link.icon}</Box>
-                                        <Text className={styles.navText}>{link.label}</Text>
-                                    </Anchor>
+                                    {link.external ? (
+                                        <Anchor
+                                            className={styles.navLink}
+                                            href={link.href}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                        >
+                                            <Box className={styles.navIcon}>{link.icon}</Box>
+                                            <Text className={styles.navText}>{link.label}</Text>
+                                        </Anchor>
+                                    ) : (
+                                        <UnstyledButton
+                                            className={styles.navLink}
+                                            onClick={() => navigate(link.href)}
+                                        >
+                                            <Box className={styles.navIcon}>{link.icon}</Box>
+                                            <Text className={styles.navText}>{link.label}</Text>
+                                        </UnstyledButton>
+                                    )}
                                 </motion.div>
                             ))}
                         </div>
@@ -114,20 +136,34 @@ export function Header() {
                 }}
             >
                 <Stack className={styles.mobileNav}>
-                    {NAVIGATION_LINKS.map((link) => (
-                        <Anchor
-                            className={styles.mobileNavLink}
-                            href={link.href}
-                            key={link.href}
-                            onClick={close}
-                            rel={link.external ? 'noopener noreferrer' : undefined}
-                            target={link.external ? '_blank' : undefined}
-                            td="none"
-                        >
-                            <Box className={styles.mobileNavIcon}>{link.icon}</Box>
-                            <Text className={styles.mobileNavText}>{link.label}</Text>
-                        </Anchor>
-                    ))}
+                    {NAVIGATION_LINKS.map((link) =>
+                        link.external ? (
+                            <Anchor
+                                className={styles.mobileNavLink}
+                                href={link.href}
+                                key={link.href}
+                                onClick={close}
+                                rel="noopener noreferrer"
+                                target="_blank"
+                                td="none"
+                            >
+                                <Box className={styles.mobileNavIcon}>{link.icon}</Box>
+                                <Text className={styles.mobileNavText}>{link.label}</Text>
+                            </Anchor>
+                        ) : (
+                            <UnstyledButton
+                                className={styles.mobileNavLink}
+                                key={link.href}
+                                onClick={() => {
+                                    navigate(link.href)
+                                    close()
+                                }}
+                            >
+                                <Box className={styles.mobileNavIcon}>{link.icon}</Box>
+                                <Text className={styles.mobileNavText}>{link.label}</Text>
+                            </UnstyledButton>
+                        )
+                    )}
                 </Stack>
             </Drawer>
 
