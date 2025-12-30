@@ -1,0 +1,27 @@
+.input {
+    background: rgba(22, 27, 35, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--mantine-radius-md);
+    font-family: var(--mantine-font-family-monospace);
+    font-size: var(--mantine-font-size-sm);
+    color: var(--mantine-color-gray-3);
+    padding-block: 12px;
+    padding-inline: 16px;
+    height: auto;
+    min-height: unset;
+    line-height: 1.5;
+    transition: border-color 150ms ease;
+}
+
+.input::placeholder {
+    color: var(--mantine-color-dark-3);
+}
+
+.input:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.input:focus {
+    border-color: rgba(34, 211, 238, 0.4);
+    outline: none;
+}

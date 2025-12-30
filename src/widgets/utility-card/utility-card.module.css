@@ -1,0 +1,73 @@
+.card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    text-decoration: none !important;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+    transition: all 0.3s ease;
+}
+
+.title {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.card:hover .title {
+    color: var(--mantine-color-cyan-4);
+}
+
+.description {
+    line-height: 1.6;
+}
+
+.arrowContainer {
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.arrowIcon {
+    color: var(--mantine-color-cyan-4);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .arrowIcon {
+    transform: translateX(4px);
+}
