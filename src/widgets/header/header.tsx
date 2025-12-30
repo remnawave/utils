@@ -45,7 +45,7 @@ export function Header() {
                         >
                             <UnstyledButton className={styles.logo} onClick={() => navigate('/')}>
                                 <Group gap="xs" wrap="nowrap">
-                                    <RemnawaveLogo size={32} />
+                                    <RemnawaveLogo color="var(--mantine-color-cyan-4)" size={32} />
                                     <Text
                                         className={styles.logoText}
                                         ff="Unbounded"
