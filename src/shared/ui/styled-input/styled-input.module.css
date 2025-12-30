@@ -1,3 +1,19 @@
+.wrapper {
+    position: relative;
+}
+
+.wrapper::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 40px;
+    bottom: 1px;
+    width: 60px;
+    background: linear-gradient(to right, transparent, rgba(22, 27, 35, 0.95));
+    pointer-events: none;
+    border-radius: 0 var(--mantine-radius-md) var(--mantine-radius-md) 0;
+}
+
 .input {
     background: rgba(22, 27, 35, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -7,6 +23,7 @@
     color: var(--mantine-color-gray-3);
     padding-block: 12px;
     padding-inline: 16px;
+    padding-right: 48px;
     height: auto;
     min-height: unset;
     line-height: 1.5;

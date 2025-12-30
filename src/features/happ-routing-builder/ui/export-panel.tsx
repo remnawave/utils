@@ -1,6 +1,6 @@
+import { IconLink, IconQrcode } from '@tabler/icons-react'
 import { Button, Paper, Stack } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { IconLink, IconQrcode } from '@tabler/icons-react'
 import { renderSVG } from 'uqr'
 
 import { BaseOverlayHeader } from '@shared/ui/base-overlay-header'
@@ -59,4 +59,3 @@ export function ExportPanel({ happLink }: ExportPanelProps) {
         </Paper>
     )
 }
-

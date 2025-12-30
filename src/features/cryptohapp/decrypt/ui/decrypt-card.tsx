@@ -1,16 +1,4 @@
-import {
-    ActionIcon,
-    Box,
-    Button,
-    Card,
-    Group,
-    Select,
-    Stack,
-    Text,
-    Textarea,
-    ThemeIcon,
-    Tooltip
-} from '@mantine/core'
+import { ActionIcon, Button, Card, Group, Select, Stack, Text, Tooltip } from '@mantine/core'
 import { IconLockOpen, IconPlus, IconTrash } from '@tabler/icons-react'
 import { useDisclosure } from '@mantine/hooks'
 import { motion } from 'motion/react'
@@ -18,6 +6,7 @@ import JSEncrypt from 'jsencrypt'
 import { useState } from 'react'
 
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+import { BaseOverlayHeader, StyledInput } from '@shared/ui'
 
 import { useDecryptKeys, useDecryptKeysActions, useSelectedKey, useSelectedKeyId } from '../model'
 import styles from './decrypt-card.module.css'
@@ -87,24 +76,13 @@ export function DecryptCard() {
         <motion.div transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
             <Card className={styles.card} padding="xl" radius="lg">
                 <Stack gap="lg">
-                    <Group gap="md" wrap="nowrap">
-                        <ThemeIcon
-                            className={styles.icon}
-                            radius="xl"
-                            size={48}
-                            variant="gradient-orange"
-                        >
-                            <IconLockOpen size={24} />
-                        </ThemeIcon>
-                        <Box>
-                            <Text fw={700} size="xl">
-                                Decrypt
-                            </Text>
-                            <Text c="dimmed" size="sm">
-                                Decrypt content with private key
-                            </Text>
-                        </Box>
-                    </Group>
+                    <BaseOverlayHeader
+                        IconComponent={IconLockOpen}
+                        iconSize={24}
+                        iconVariant="gradient-orange"
+                        subtitle="Decrypt content with private key"
+                        title="Decrypt"
+                    />
 
                     <Stack gap="xs">
                         <Group align="flex-end" gap="xs">
@@ -117,13 +95,14 @@ export function DecryptCard() {
                                 placeholder={
                                     keys.length === 0 ? 'No keys saved' : 'Select a key...'
                                 }
+                                size="md"
                                 style={{ flex: 1 }}
                                 value={selectedKeyId}
                             />
                             <Tooltip label="Add new key">
                                 <ActionIcon
                                     onClick={openModal}
-                                    size="input-sm"
+                                    size="input-md"
                                     variant="gradient-cyan"
                                 >
                                     <IconPlus size={18} />
@@ -134,7 +113,7 @@ export function DecryptCard() {
                                     <ActionIcon
                                         color="red"
                                         onClick={handleDeleteKey}
-                                        size="input-sm"
+                                        size="input-md"
                                         variant="gradient-red"
                                     >
                                         <IconTrash size={18} />
@@ -146,21 +125,12 @@ export function DecryptCard() {
 
                     <AddKeyModal onClose={closeModal} opened={modalOpened} />
 
-                    <Textarea
-                        autosize
+                    <StyledInput
                         description="Base64 encoded encrypted content or full deep link"
                         label="Encrypted Content"
-                        maxRows={6}
-                        minRows={6}
-                        onChange={(e) => setEncryptedContent(e.currentTarget.value)}
+                        onChange={(value) => setEncryptedContent(value)}
                         placeholder="happ://crypt4/base64encodeddata... or just base64encodeddata..."
                         size="md"
-                        styles={{
-                            input: {
-                                fontFamily: 'Fira Mono, monospace',
-                                fontSize: '0.70rem'
-                            }
-                        }}
                         value={encryptedContent}
                     />
 

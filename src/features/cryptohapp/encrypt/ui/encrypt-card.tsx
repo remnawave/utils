@@ -1,20 +1,11 @@
-import {
-    Box,
-    Button,
-    Card,
-    Group,
-    SegmentedControl,
-    Stack,
-    Text,
-    TextInput,
-    ThemeIcon
-} from '@mantine/core'
 import { createHappCryptoLink, type HappCryptoVersion } from '@kastov/cryptohapp'
+import { Box, Button, Card, SegmentedControl, Stack, Text } from '@mantine/core'
 import { IconLock } from '@tabler/icons-react'
 import { motion } from 'motion/react'
 import { useState } from 'react'
 
 import { CopyableCodeBlock } from '@shared/ui/copyable-code-block'
+import { BaseOverlayHeader, StyledInput } from '@shared/ui'
 
 import styles from './encrypt-card.module.css'
 
@@ -44,29 +35,18 @@ export function EncryptCard() {
         <motion.div transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
             <Card className={styles.card} padding="xl" radius="lg">
                 <Stack gap="lg">
-                    <Group gap="md" wrap="nowrap">
-                        <ThemeIcon
-                            className={styles.icon}
-                            radius="xl"
-                            size={48}
-                            variant="gradient-cyan"
-                        >
-                            <IconLock size={24} />
-                        </ThemeIcon>
-                        <Box>
-                            <Text fw={700} size="xl">
-                                Encrypt
-                            </Text>
-                            <Text c="dimmed" size="sm">
-                                Create Happ crypto deep link
-                            </Text>
-                        </Box>
-                    </Group>
+                    <BaseOverlayHeader
+                        IconComponent={IconLock}
+                        iconSize={24}
+                        iconVariant="gradient-cyan"
+                        subtitle="Create Happ crypto deep link"
+                        title="Encrypt"
+                    />
 
-                    <TextInput
+                    <StyledInput
                         description="URL or text to encrypt"
                         label="Content"
-                        onChange={(e) => setContent(e.currentTarget.value)}
+                        onChange={(value) => setContent(value)}
                         placeholder="https://subscription.link.com/s/..."
                         size="md"
                         value={content}
@@ -113,27 +93,20 @@ export function EncryptCard() {
 
                     {result && (
                         <Stack gap="md">
-                            <Stack>
-                                <Text fw={500} size="sm">
-                                    Deep Link Prefix
-                                </Text>
-                                <CopyableCodeBlock value={result.deepLink} />
-                            </Stack>
+                            <CopyableCodeBlock
+                                inputWrapperProps={{ label: 'Deep Link Prefix' }}
+                                value={result.deepLink}
+                            />
 
-                            <Stack>
-                                <Text fw={500} size="sm">
-                                    Encrypted Content
-                                </Text>
+                            <CopyableCodeBlock
+                                inputWrapperProps={{ label: 'Encrypted Content' }}
+                                value={result.encryptedContent}
+                            />
 
-                                <CopyableCodeBlock value={result.encryptedContent} />
-                            </Stack>
-
-                            <Stack>
-                                <Text fw={500} size="sm">
-                                    Full Link
-                                </Text>
-                                <CopyableCodeBlock value={fullLink} />
-                            </Stack>
+                            <CopyableCodeBlock
+                                inputWrapperProps={{ label: 'Full Link' }}
+                                value={fullLink}
+                            />
                         </Stack>
                     )}
                 </Stack>
