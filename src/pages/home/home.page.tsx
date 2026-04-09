@@ -22,7 +22,7 @@ const UTILITIES = [
         description:
             'Experience the power of Remnawave with zero setup. Deploy your own instance in minutes and explore all features risk-free.',
         icon: <IconRocket size={28} />,
-        href: 'https://try.tg',
+        href: 'https://try.rw',
         badgeColor: 'violet',
         external: true,
         variant: 'gradient-violet'
